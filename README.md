@@ -15,20 +15,18 @@ We provide further tools to combine all of the above.
 # Keras setup
 ## Theano backend
 
- The 
+The installation of theano is pulled in when installing Keras. There is an
+experimental build for cscs.
 
 ## Tensorflow backend 
-This is not supported yet
+
+There is a tensorflow build for CSCS but there is a destructive interference
+with Keras when running on the cluster.
 
 # Distributed Training
-We provide here instructions to run the [mpi_learn
-package](https://github.com/duanders/mpi_learn).
-
-```
-git clone git@github.com:vlimant/mpi_learn.git
-cd mpi_learn 
-git branch python_3
-```
+The nstructions get the [mpi_learn
+package](https://github.com/duanders/mpi_learn) is available on github, and we
+pull it in in the python environement setup below.
 
 # Hyperparameter Optimization
 
@@ -53,12 +51,10 @@ mkdir $SCRATCH/mongodb
 ```
 ## Spearmint
 
-The instructions are available [from spearmint on github](https://github.com/HIPS/Spearmint)
-```
-cd $HOME
-git clone https://github.com/HIPS/Spearmint.git
-pip install -e $PWD/Spearmint
-```
+The instructions are available [from spearmint on
+github](https://github.com/HIPS/Spearmint) and is pulled in in the python
+environement setup below.
+
 
 # Python envirronment
 
@@ -150,4 +146,11 @@ sbatch mnist_submit
 
 ## MPI Learn Runtest
 
+Alpha instructions [are provided
+there](https://github.com/vlimant/mpi-learn-benchmark) and are still experimental.
+
 ## Spearmint Runtest
+
+This is massively failing on python3 because the package is not python2
+compatible.
+Effort is on-going to make a python3 port.
