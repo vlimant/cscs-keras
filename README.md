@@ -14,27 +14,8 @@ We provide further tools to combine all of the above.
 
 # Keras setup
 ## Theano backend
-The python libraries are installed once under a virtual environment with the piz daint gpu setting
-```
-module load daint-gpu
 
-module load Python/3.5.2-CrayGNU-2016.11
-module load pycuda/2016.1.2-CrayGNU-2016.11-Python-3.5.2-cuda-8.0
-module load h5py/2.6.0-CrayGNU-2016.11-Python-3.5.2-serial
-
-virtualenv kerasP3
-source kerasP3/bin/activate
-
-pip install tables
-pip install keras --upgrade
-pip install scikit-learn
-pip install mpi4py
-```
-
-The environement can be used anytime by activating the virtual env
-```
-source kerasP3/bin/activate
-```
+ The 
 
 ## Tensorflow backend 
 This is not supported yet
@@ -50,6 +31,91 @@ git branch python_3
 ```
 
 # Hyperparameter Optimization
+
+## Mongodb 
+
+Install mongodb from a compiled version
+```
+mkdir mongodb
+cd mongodb
+wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-suse12-3.4.2.tgz
+tar zxvf mongodb-linux-x86_64-suse12-3.4.2.tgz
+
+```
+
+and run a mongodb instance from the scratch directory
+
+```
+mkdir $SCRATCH/mongodb
+ mongodb/mongodb-linux-x86_64-suse12-3.4.2/bin/mongod --fork --dbpath
+ $SCRATCH/mongodb/ --logpath
+ $SCRATCH/mongodb/db.log
+```
+## Spearmint
+
+The instructions are available [from spearmint on github](https://github.com/HIPS/Spearmint)
+```
+cd $HOME
+git clone https://github.com/HIPS/Spearmint.git
+pip install -e $PWD/Spearmint
+```
+
+# Python envirronment
+
+The python libraries are installed once under a virtual environment with the piz daint gpu setting
+```
+module load daint-gpu
+
+module load Python/3.5.2-CrayGNU-2016.11
+module load pycuda/2016.1.2-CrayGNU-2016.11-Python-3.5.2-cuda-8.0
+module load h5py/2.6.0-CrayGNU-2016.11-Python-3.5.2-serial
+
+virtualenv kerasP3
+source kerasP3/bin/activate
+
+pip install tables
+pip install keras --upgrade
+pip install scikit-learn
+pip install mpi4py
+pip install pymongo
+cd kerasP3
+git clone https://github.com/HIPS/Spearmint.git
+pip install -e $PWD/Spearmint
+cd -
+```
+
+The environement can be used anytime by activating the virtual env
+```
+source kerasP3/bin/activate
+```
+or with python2
+
+```
+module load daint-gpu
+module load h5py/2.6.0-CrayGNU-2016.11-Python-2.7.12-serial
+module load pycuda/2016.1.2-CrayGNU-2016.11-Python-2.7.12-cuda-8.0.54
+
+virtualenv kerasP2
+source kerasP2/bin/activate
+
+pip install tables
+pip install keras --upgrade
+pip install scikit-learn
+pip install mpi4py
+pip install pymongo
+
+cd kerasP2
+git clone https://github.com/HIPS/Spearmint.git
+pip install -e $PWD/Spearmint
+cd -
+```
+
+and use it thereafter
+
+```
+source kerasP2/bin/activate
+```
+
 
 # Running on Piz Daint
 ## Keras Runtest
